@@ -10,7 +10,7 @@ Cada fala vira um render separado do avatar a partir do áudio dela. Vantagens:
 
 ## Fundo transparente
 
-Peça a saída em WebM com canal alfa. Assim você coloca o avatar em qualquer fundo, sobrepõe texto atrás da cabeça e põe dois clones no mesmo quadro sem recorte manual.
+Peça a saída em WebM com canal alfa (transparência). Não consegui confirmar na documentação pública da HeyGen qual opção ou parâmetro liga isso, nem se vale em todos os planos: confira na documentação atual ou no suporte. Com o alfa, você coloca o avatar em qualquer fundo, sobrepõe texto atrás da cabeça e põe dois clones no mesmo quadro sem recorte manual.
 
 ## Fluxo de upload do áudio
 
@@ -36,4 +36,4 @@ Num trecho com um painel de interface na tela, o prompt dizia algo como "vira pr
 
 ## Custo
 
-Avatar V fica na faixa de 20 créditos por minuto. Uma fala de 20s custou entre 17 e 19 créditos. Planeje uma refação por fala no orçamento.
+Nos meus testes, uma fala de 20s custou entre 17 e 19 créditos. Planeje uma refação por fala no orçamento e confira a tabela atual da HeyGen.

@@ -2,15 +2,15 @@
 
 ## Clone
 
-- Professional Voice Clone (PVC) treinado com ~2 horas do meu áudio. Instant clone com 1 minuto funciona pra teste, mas o timbre varia mais entre frases.
-- Modelo de geração: `eleven_v4`. Aceita tags de emoção entre colchetes no próprio texto, por exemplo `[calmo, debochado] Relaxa.`.
+- Professional Voice Clone (PVC) treinado com ~2 horas do meu áudio (palestra gravada mais áudios longos; veja no [capítulo 1](01-gravacao-base.md) o que funcionou melhor). Instant Voice Clone, que usa só 1 minuto de áudio, funciona pra teste, mas o timbre varia mais entre frases.
+- Modelo de geração: `eleven_v4`. A documentação da ElevenLabs lista esse modelo com tags de áudio entre colchetes no próprio texto, e todos os exemplos de lá estão em inglês, por exemplo `[sarcastic] Relaxa.`. Não verifiquei na documentação se tags em português funcionam; teste com uma frase curta antes e, na dúvida, use as tags em inglês. Veja a [lista de modelos](https://elevenlabs.io/docs/overview/models).
 
 ## Gere por frase, com contexto
 
 Um bloco único de 30 segundos sai com a mesma temperatura do começo ao fim. O que funciona:
 
 - Uma geração por fala (ou por ato do roteiro).
-- Passe `previous_text` e `next_text` da API, pra entonação continuar de uma frase pra outra.
+- Passe `previous_text` e `next_text` da API, pra entonação continuar de uma frase pra outra. A referência da API descreve esses campos como ajuda de continuidade entre gerações; ela não diz quais modelos respeitam, então confira com o modelo que você escolheu.
 - Ajuste por ato. Os valores que usei num vídeo de 58s:
 
 | Ato | stability | similarity_boost | style | speed |
@@ -19,7 +19,7 @@ Um bloco único de 30 segundos sai com a mesma temperatura do começo ao fim. O 
 | Dor (urgência) | 0.40 | 0.86 | 0.38 | 1.16 |
 | Virada (autoridade) | 0.36 | 0.88 | 0.48 | 1.13 |
 | Prova (clareza) | 0.42 | 0.86 | 0.40 | 1.14 |
-| CTA (convite) | 0.35 | 0.90 | 0.50 | 1.10 |
+| CTA, a chamada pra ação (convite) | 0.35 | 0.90 | 0.50 | 1.10 |
 
 - Peça 2 takes por frase e escolha ouvindo. Não aperte "gerar" de novo à toa: cada geração cobra.
 

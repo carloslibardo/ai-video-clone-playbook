@@ -12,14 +12,15 @@ ffmpeg -i video.mp4 -vf blackdetect=d=0.1:pix_th=0.10 -an -f null - 2>&1 | grep 
 # frames congelados
 ffmpeg -i video.mp4 -vf freezedetect=n=0.003:d=0.5 -an -f null - 2>&1 | grep freeze_start
 
-# loudness (alvo -14 LUFS, pico < -1 dBFS)
+# loudness (alvo -14 LUFS, a medida de volume percebido; pico < -1 dBFS)
 ffmpeg -i video.mp4 -af loudnorm=print_format=summary -f null - 2>&1 | tail -12
 
 # pronúncia: a transcrição tem que bater com o roteiro
 whisper video.mp4 --model small --language pt
 
-# contact sheet: um frame por segundo numa grade só
-ffmpeg -i video.mp4 -vf "fps=1,scale=270:-1,tile=6x6" -frames:v 1 sheet.jpg
+# contact sheet (grade de miniaturas): um frame por segundo, 6 por linha, linhas conforme a duração
+LINHAS=$(ffprobe -v error -show_entries format=duration -of csv=p=0 video.mp4 | awk '{print int(($1+5)/6)}')
+ffmpeg -i video.mp4 -vf "fps=1,scale=270:-1,tile=6x$LINHAS" -frames:v 1 sheet.jpg
 ```
 
 - [ ] Vídeo e áudio com a mesma duração

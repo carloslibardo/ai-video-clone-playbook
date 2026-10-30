@@ -9,12 +9,12 @@ Exporte um 9:16 1080x1920 a 30 fps e use em Instagram Reels, TikTok, YouTube Sho
 Nem toda rede deixa definir a capa por API hoje. O truque que funciona em quase todas: **coloque a capa como o primeiro frame do vídeo, por 0,1 segundo**.
 
 ```bash
-ffmpeg -loop 1 -t 0.1 -i capa.jpg -i video.mp4 \
-  -filter_complex "[0]scale=1080:1920,setsar=1,fps=30[c];[1:v]setsar=1[v];[c][v]concat=n=2:v=1:a=0[out];[1:a]adelay=100:all=1[a]" \
-  -map "[out]" -map "[a]" -c:v libx264 -crf 18 -c:a aac -b:a 192k video-com-capa.mp4
+ffmpeg -loop 1 -framerate 30 -t 0.1 -i capa.jpg -i video.mp4 \
+  -filter_complex "[0:v]scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fps=30[c];[1:v]setsar=1,fps=30[v];[c][v]concat=n=2:v=1:a=0,format=yuv420p[out];[1:a]adelay=100:all=1[a]" \
+  -map "[out]" -map "[a]" -c:v libx264 -crf 18 -c:a aac -b:a 192k -movflags +faststart video-com-capa.mp4
 ```
 
-O `adelay=100` atrasa o áudio nos mesmos 0,1s da capa. Sem ele a boca fica 100 ms adiantada em relação à voz o vídeo inteiro.
+A capa dura 3 quadros a 30 fps (0,1 s), por causa do `-framerate 30`. Uma capa que não é 9:16 ganha barras pretas em vez de ficar esticada. O `adelay=100` atrasa o áudio nos mesmos 0,1s da capa. Sem ele a boca fica 100 ms adiantada em relação à voz o vídeo inteiro.
 
 - Instagram, TikTok e LinkedIn pegam o primeiro frame como capa padrão.
 - YouTube Shorts escolhe sozinho. Troque no YouTube Studio depois de publicar.

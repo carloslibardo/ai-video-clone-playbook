@@ -1,7 +1,18 @@
-"""Motion-graphics effects for the clone30s v2 edit: snap shockwave, camera shake, light orb, text flames.
+"""Efeitos de motion graphics para vídeo vertical: onda de choque, tremor de câmera, bola de luz, fogo no texto.
 
-Frame effects (shockwave displacement, shake, flash) work on the float RGB frame before overlays;
-overlay effects (orb, flames) draw onto the RGBA PIL canvas like the assembler's Dyn elements.
+Dependências: pip install numpy scipy pillow
+
+Formato esperado:
+- Efeitos de quadro (shockwave_frame, shake_frame, flash_frame, chroma_frame): array float32 HxWx3,
+  com H, W = 1920, 1080 (RGB, valores de 0 a 255).
+- Efeitos de overlay (orb, ring, Flames.draw): um PIL.Image RGBA de 1080x1920. O canvas pode ser
+  opaco ou transparente; o alfa do efeito é somado ao do canvas.
+
+Exemplo mínimo:
+    canvas = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    orb(canvas, t=0.5, t0=0.0, dur=1.0, p0=(200, 1500), p1=(800, 600))
+    frame = np.asarray(canvas.convert("RGB"), np.float32)
+    frame = shake_frame(frame, age=0.1)
 """
 
 import math
@@ -19,15 +30,17 @@ def _ease_out(x: float) -> float:
 
 
 def _add(canvas: Image.Image, rgb: np.ndarray, x0: int, y0: int):
-    """Additive (screen-like) blend of a float RGB patch into the canvas at (x0, y0), clipped to the frame."""
+    """Additive (screen-like) blend of a float RGB patch into an RGBA canvas at (x0, y0), clipped to the frame.
+    The patch brightness also raises the canvas alpha, so the effect stays visible on a transparent overlay."""
     h, w = rgb.shape[:2]
     xa, ya, xb, yb = max(0, x0), max(0, y0), min(W, x0 + w), min(H, y0 + h)
     if xa >= xb or ya >= yb:
         return
-    base = np.asarray(canvas.crop((xa, ya, xb, yb)), np.float32)
-    patch = rgb[ya - y0:yb - y0, xa - x0:xb - x0]
-    base[..., :3] = 255 - (255 - base[..., :3]) * (1 - np.clip(patch, 0, 255) / 255)
-    canvas.paste(Image.fromarray(base.astype(np.uint8), "RGBA"), (xa, ya))
+    base = np.asarray(canvas.convert("RGBA").crop((xa, ya, xb, yb)), np.float32)
+    patch = np.clip(rgb[ya - y0:yb - y0, xa - x0:xb - x0], 0, 255)
+    base[..., :3] = 255 - (255 - base[..., :3]) * (1 - patch / 255)
+    base[..., 3] = np.maximum(base[..., 3], patch.max(axis=-1))
+    canvas.paste(Image.fromarray(base.astype(np.uint8)), (xa, ya))
 
 
 # ---------------------------------------------------------------- frame effects
@@ -70,7 +83,7 @@ def shake_frame(img: np.ndarray, age: float, dur: float = 0.32, amp: float = 22)
     dx = int(amp * decay * math.sin(age * 2 * math.pi * 17))
     dy = int(amp * 0.7 * decay * math.cos(age * 2 * math.pi * 13))
     s = 1.0 + 0.04 * decay
-    im = Image.fromarray(img.astype(np.uint8))
+    im = Image.fromarray(np.clip(img, 0, 255).astype(np.uint8))
     cw, ch = W / s, H / s
     x0 = min(max((W - cw) / 2 - dx, 0.0), W - cw)
     y0 = min(max((H - ch) / 2 - dy, 0.0), H - ch)

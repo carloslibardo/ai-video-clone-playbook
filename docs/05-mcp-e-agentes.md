@@ -8,9 +8,9 @@ Eu não abro o site da HeyGen nem o da ElevenLabs. O Claude Code fala com as dua
 |---|---|
 | HeyGen | upload de áudio, render do avatar por fala, status, looks |
 | ElevenLabs | geração de voz por frase, transcrição, flows |
-| Contatio (o meu produto) | publicar em todas as redes, reposts, agendamento |
+| Contatio (o meu produto, opcional) | publicar em várias redes; não é necessário pro fluxo |
 
-Instale os MCPs oficiais das ferramentas na sua conta e deixe o agente descobrir as ferramentas sozinho. Não cole chave de API em chat ou em arquivo do repositório.
+MCP (Model Context Protocol) é o jeito de o agente usar uma ferramenta externa. Instale os servidores oficiais pela documentação de cada uma ([HeyGen](https://docs.heygen.com), [ElevenLabs](https://elevenlabs.io/docs)) e adicione no Claude Code com `claude mcp add` (veja a [documentação de MCP do Claude Code](https://docs.claude.com/en/docs/claude-code/mcp)). Depois deixe o agente descobrir as ferramentas sozinho. Não cole chave de API em chat ou em arquivo do repositório; use a variável de ambiente que o servidor pedir.
 
 ## Como dividir o trabalho com o agente
 
