@@ -3,7 +3,7 @@
 ## Clone
 
 - Professional Voice Clone (PVC) treinado com ~2 horas do meu áudio (palestra gravada mais áudios longos; veja no [capítulo 1](01-gravacao-base.md) o que funcionou melhor). Instant Voice Clone, que usa só 1 minuto de áudio, funciona pra teste, mas o timbre varia mais entre frases.
-- Modelo de geração: `eleven_v4`. A documentação da ElevenLabs lista esse modelo com tags de áudio entre colchetes no próprio texto, e todos os exemplos de lá estão em inglês, por exemplo `[sarcastic] Relaxa.`. Não verifiquei na documentação se tags em português funcionam; teste com uma frase curta antes e, na dúvida, use as tags em inglês. Veja a [lista de modelos](https://elevenlabs.io/docs/overview/models).
+- Modelo de geração: `eleven_v4` (o que eu usei em todos os vídeos). Como casar a emoção de cada linha com o movimento do avatar: [capítulo 9](09-expressoes-e-atuacao.md). A documentação da ElevenLabs lista esse modelo com tags de áudio entre colchetes no próprio texto, e todos os exemplos de lá estão em inglês, por exemplo `[sarcastic] Relaxa.`. Não verifiquei na documentação se tags em português funcionam; teste com uma frase curta antes e, na dúvida, use as tags em inglês. Veja a [lista de modelos](https://elevenlabs.io/docs/overview/models).
 
 ## Gere por frase, com contexto
 

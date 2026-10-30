@@ -8,6 +8,7 @@ Este repositório é o passo a passo completo, pra quem chegou pelo meu reel ou 
 
 | Arquivo | Assunto |
 |---|---|
+| [docs/00-guia-pratico.md](docs/00-guia-pratico.md) | Comece por aqui: seu primeiro vídeo, passo a passo |
 | [docs/01-gravacao-base.md](docs/01-gravacao-base.md) | Como gravar os 30 segundos que treinam o seu clone |
 | [docs/02-voz-elevenlabs.md](docs/02-voz-elevenlabs.md) | Clone de voz, pronúncia, emoção por frase |
 | [docs/03-video-heygen.md](docs/03-video-heygen.md) | Avatar, looks (roupas), prompts de movimento, fundo transparente |
@@ -16,6 +17,8 @@ Este repositório é o passo a passo completo, pra quem chegou pelo meu reel ou 
 | [docs/06-open-source.md](docs/06-open-source.md) | Modelos abertos pra ficar mais barato: o que testamos e o que aprendemos |
 | [docs/07-publicacao.md](docs/07-publicacao.md) | Postar em todas as redes, capa, rótulo de IA |
 | [docs/08-checklist-qa.md](docs/08-checklist-qa.md) | O que conferir antes de publicar |
+| [docs/09-expressoes-e-atuacao.md](docs/09-expressoes-e-atuacao.md) | Direção de atuação: expressão, olhar, gesto, voz e movimento por linha |
+| [docs/10-dicas-e-melhorias.md](docs/10-dicas-e-melhorias.md) | O que deu errado e como corrigi, mais as próximas melhorias |
 | [prompts/](prompts/) | System prompts e prompts de movimento prontos pra copiar |
 | [scripts/clone_fx.py](scripts/clone_fx.py) | Efeitos (onda de choque, tremor, flash, fogo no texto) usados no vídeo. Dependências em `requirements.txt` |
 
@@ -30,12 +33,14 @@ Este repositório é o passo a passo completo, pra quem chegou pelo meu reel ou 
 ## O fluxo em uma tela
 
 ```
-roteiro (texto)
-  -> voz: ElevenLabs, clone profissional treinado com ~2h de áudio seu
-  -> vídeo: HeyGen Avatar V, treinado com ~30s de vídeo seu, um render por fala
+guia prático (docs/00) -> base gravada (30s, docs/01)
+roteiro (texto, com direção de atuação, docs/09)
+  -> voz: ElevenLabs eleven_v4, clone profissional treinado com ~2h de áudio seu
+  -> vídeo: HeyGen Avatar V (engine avatar_v), treinado com ~30s de vídeo seu, um render por fala
   -> montagem: Python (PIL/numpy) + ffmpeg, efeitos e legenda por código
   -> QA: whisper confere a pronúncia, contact sheet confere os frames
   -> publicação: uma versão 9:16 com a capa no primeiro frame
+  (deu errado? docs/10)
 ```
 
 ## Quanto custa

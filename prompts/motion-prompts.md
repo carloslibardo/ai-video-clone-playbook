@@ -1,6 +1,6 @@
 # Prompts de movimento (HeyGen Avatar V)
 
-Escreva em inglês, uma intenção por render. Copie e ajuste.
+Para HeyGen Avatar V (engine `avatar_v`). Como escolher a intenção de cada linha: [capítulo 9](../docs/09-expressoes-e-atuacao.md). Escreva em inglês, uma intenção por render. Copie e ajuste.
 
 | Intenção | Prompt |
 |---|---|

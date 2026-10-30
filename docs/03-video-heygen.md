@@ -1,5 +1,7 @@
 # 3. Vídeo com HeyGen Avatar V
 
+O motor que eu uso é o Avatar V (engine `avatar_v`). Para a direção de expressão de cada render, veja o [capítulo 9](09-expressoes-e-atuacao.md).
+
 ## Um render por fala, não um render do vídeo inteiro
 
 Cada fala vira um render separado do avatar a partir do áudio dela. Vantagens:
